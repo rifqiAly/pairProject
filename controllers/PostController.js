@@ -55,7 +55,11 @@ class PostController{
         res.redirect(`/users/${req.params.userid}/posts`)
       })
       .catch(err =>{
-        res.send(err)
+        let result = []
+        err.errors.forEach(el => {
+            result.push(el.message)
+        })
+        res.send(result)
       })
   }
   
@@ -89,7 +93,11 @@ class PostController{
         })
       .catch((err)=>{
         if(err){
-          res.send(err)
+          let result = []
+          err.errors.forEach(el => {
+              result.push(el.message)
+          })
+          res.send(result)
         }
       }) 
   }

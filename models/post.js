@@ -18,10 +18,40 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Post.init({
-    namePost: DataTypes.STRING,
-    rating: DataTypes.INTEGER,
-    content: DataTypes.STRING,
-    imgURL: DataTypes.STRING
+    namePost: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'nama is required'
+        }
+      }
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'rating is required'
+        }
+      }
+    },
+    content: {
+      type: DataTypes.STRING,
+      validate: {
+        args: true,
+        msg: 'content is required'
+      }
+    }, 
+    imgURL: {
+      type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'image tidak boleh kosong'
+          }
+        }
+    } 
   }, {
     sequelize,
     modelName: 'Post',

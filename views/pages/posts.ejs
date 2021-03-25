@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
-  <h1>Posts</h1>
-  <a href="/users/<%= user.id%>/posts/add">add posts</a>
+  <h1 style="text-align: center; color: black; font-size: 50px;">Posts</h1>
+  <button style="margin-left: 100px; margin-top: -20px;" type="button" class="btn btn-primary"><a style="text-decoration: none; color: white;" href="/users/<%= user.id%>/posts/add">add posts</a></button><a>
   <table border="1">
     <tr>
       <th>Image</th>
@@ -12,12 +12,12 @@
     </tr>
     <% data.forEach(el =>{%>
       <tr>
-        <td><img src="<%= el.imgURL%>"></td>
+        <td><img style="width: 300px; height: 50vh;" src="<%= el.imgURL%>"></td>
         <td><%= el.namePost%></td>
         <td><%= Helpers.rateToStar(el.rating)%></td>
         <td><%= el.content%></td>
         <td><%= el.User.username%></td>
-        <td><a href="/users/<%= user.id%>/posts/<%=el.id%>/edit">Edit</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/delete">Delete</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/addTag">Add Tag</a></td> 
+        <td><a href="/users/<%= user.id%>/posts/<%=el.id%>/edit">Edit</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/delete" onclick="return confirm('Yakin mau di delete?🥺😢🤣')">Delete</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/addTag">Add Tag</a></td> 
       </tr>
     <% })%>
   </table>

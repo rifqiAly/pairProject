@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "postgres",
-    "database": "pairProject",
+    "database": "TagShare",
     "host": "localhost",
     "dialect": "postgres"
   },

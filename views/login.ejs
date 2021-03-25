@@ -8,18 +8,22 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Login</title>
 </head>
-<body>
+<body class="tampilan">
     <div>
-        <h3>LOGIN</h3>
-        <form action="/" method="POST">
-            <label for="username">Username</label><br>
-            <input type="text" name="username" id="username" required>
+        <h1 style="text-align: center; margin-top: 50px; color: white; margin-top: 100px; margin-left: -400px;" class="judul-add">Login</h1>
+        <form style="background-color: white;  margin-left: 120px; margin-right: 200px; width: 50%; padding: 25px 0 25px 0;" action="/" method="POST">
+            <div class="form-group">
+                <label style="margin-left: 100px;" for="exampleInputEmail1">Username</label>
+                <input style="margin-left: 100px; width: 50%;" type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="username">
+            </div>
+            <div class="form-group">
+                <label style="margin-left: 100px;" for="exampleInputPassword1">Password</label>
+                <input style="margin-left: 100px;  width: 50%;" type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="password">
+            </div>
             <br>
-            <label for="password">Password</label><br>
-            <input type="password" name="password" id="password" required>
+            <button style="margin-left: 100px;" type="submit" class="btn btn-primary" value="submit">Submit</button>
             <br>
-            <button type="submit">Login</button>
-            <p>belum memiliki akun? <span><a href="/register">Register now</a></span></p>
+            <p class="regis">belum memiliki akun? <span><a href="/register">Register now</a></span></p>
         </form>
     </div>
 </body>

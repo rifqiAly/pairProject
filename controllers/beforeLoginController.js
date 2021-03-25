@@ -2,6 +2,7 @@
 const {User} = require('../models')
 const {Op} = require('sequelize')
 const Helper = require('../helpers/handle-errors')
+const bcrypt = require('bcryptjs');
 
 class Controller{
 
@@ -52,7 +53,7 @@ class Controller{
             res.redirect(`/users/${req.session.idUser}`)
         })
         .catch(err=>{
-            res.redirect('/')
+            res.send(err)
         })
 
     }

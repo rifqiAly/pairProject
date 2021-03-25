@@ -1,16 +1,18 @@
 <%- include('../partials/header') %>
 
-<h1>List Users</h1>
+<h1 style="text-align: center; color: black; font-size: 50px; margin-top: 100px;">List Users</h1>
 
-<table border="1">
-  <tr>
-    <th>Username</th>
-    <th>Name</th>
-  </tr>
-  <% users.forEach(el =>{%>
+<table class="table table-info">
+  <thead class="thead-dark">
     <tr>
-      <td><%= el.username%></td>
-      <td><%= el.first_name%></td>
+      <th scope="col">username</th>
+      <th scope="col">first_name</th>
+  </thead>
+  <tbody>
+    <% users.forEach(el => { %>
+      <tr>
+        <td><%= el.username %> </td>
+        <td><%= el.first_name %> </td>
     </tr>
   <% })%>
 </table>

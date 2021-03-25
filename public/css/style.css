@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* ejs navbar */
+.nav-item:hover {
+    border: 2px solid white;
+}
+
+.navbar-brand:hover {
+    border: 2px solid white;
+    padding: 0 5px 0;
+    transition: all .3s;
+}
+.navbar {
+    height: 10vh;
+}
+.navbar-nav {
+    padding: 10px;
+}
+
+.tampilan {
+    background-image: url('/css/img/pikachu.jpg');
+    background-size: cover;
+}
+.regis {
+    margin-left: 100px;
+}
+
+.template {
+    width: 800px;
+    background-color: grey;
+    margin-left: 300px;
+}
