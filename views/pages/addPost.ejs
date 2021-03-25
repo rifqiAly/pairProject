@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+  <h1>Add Post</h1>
+  <form method="POST">
+    <label>Name</label>
+    <br>
+    <input type="text" name="namePost">
+    <br>
+    <label>Rating</label>
+    <br>
+    <input type="number" name="rating" min="1" max="5">
+    <br>
+    <label>Content</label>
+    <br>
+    <input type="text" name="content">
+    <br>
+    <br>
+    <input type="submit" value="Save" >
+    <a href="/posts"> Cancel </a>
+  </form>
+</body>
+</html>

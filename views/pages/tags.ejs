@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+  <h1>Tags</h1>
+  <a href="tags/add">add Tag</a>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+    <% data.forEach(el =>{%>
+      <tr>
+        <td><%= el.nameTag%></td>
+        <td><a href="tags/<%=el.id%>/delete" onclick="return confirm('AR YU SYUR ABOT DAT?')">Delete</a> || <a href="tags/<%=el.id%>/seePosts/">See Posts</a></td>
+      </tr>
+    <% })%>
+  </table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+  <h1><%=data.User.username%>'s Post</h1>
+  <form method="POST">
+    <label>Name</label>
+    <br>
+    <input type="text" name="namePost" value="<%= data.namePost%>">
+    <br>
+    <br>
+    <label>Rating</label>
+    <br>
+    <input type="number" name="rating" min="1" max="5" value="<%= data.rating%>">
+    <br>
+    <br>
+    <label>Content</label>
+    <br>
+    <input type="text" name="content" value="<%=data.content%>">
+    <br>
+    <br>
+    <input type="submit" value="Save" >
+    <a href="/posts"> Cancel </a>
+  </form>
+</body>
+</html>
