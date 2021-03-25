@@ -6,6 +6,7 @@
     <label>Tag</label>
     <br>
     <select name="TagId">
+      <option>-Select-</option>
       <%
         tag.forEach((el,i) => 
         {
@@ -16,7 +17,7 @@
     <br>
     <br>
     <input type="submit" value="Save" >
-    <a href="/movies"> Cancel </a>
+    <a href="/users/<%=user.id%>/posts"> Cancel </a>
   </form>
 
   <h1>List Tag</h1>

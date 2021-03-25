@@ -10,14 +10,23 @@ class TagController{
   static showtags(req,res){
     TagController.readTag()
       .then(a =>{
+        let user={
+          id: req.params.userid
+        }
         res.render('pages/tags',{
-          data:a
+          data:a,
+          user
         })
       })
   }
   
   static showtagsAdd(req,res){
-    res.render('pages/addTag')
+    let user={
+      id: req.params.userid
+    }
+    res.render('pages/addTag',{
+      user
+    })
   }
 
   
@@ -27,7 +36,7 @@ class TagController{
       nameTag: req.body.nameTag
     })
       .then(()=>{
-        res.redirect('/tags')
+        res.redirect(`/users/${req.params.userid}/tags`)
       })
       .catch(err =>{
         res.send(err)
@@ -37,8 +46,10 @@ class TagController{
   static showtagEdit(req,res){
     Tag.findOne({ where: { id: +req.params.id }})
     .then(a=>{
-      console.log(a)
-      res.render('pages/editTag',{data: a})
+      let user={
+        id: req.params.userid
+      }
+      res.render('pages/editTag',{data: a, user})
     })
     .catch(err=>{
       res.send(err)
@@ -48,7 +59,7 @@ class TagController{
   static tagDelete(req,res){
     Tag.destroy({ where: {id: req.params.id}})
       .then(()=>{
-        res.redirect('/tags')
+        res.redirect(`/users/${req.params.userid}/tags`)
       })
       .catch((err)=>{
         res.send(err)
@@ -62,13 +73,16 @@ class TagController{
       },
       include: [{
         model: Post,
-        // attributes: ["id","namePost","Rating"]
       }]
     })
       .then(a =>{
-        console.log(a)
+        console.log(a.posts)
+        let user={
+          id: req.params.userid
+        }
         res.render('pages/seePostsInTag', {
           tag: a,
+          user
         })
       })
       .catch(err =>[

@@ -1,8 +1,9 @@
 <%- include('../partials/header') %>
   <h1>Posts</h1>
-  <a href="/posts/add">add posts</a>
+  <a href="/users/<%= user.id%>/posts/add">add posts</a>
   <table border="1">
     <tr>
+      <th>Image</th>
       <th>Name</th>
       <th>Rating</th>
       <th>Content</th>
@@ -11,11 +12,12 @@
     </tr>
     <% data.forEach(el =>{%>
       <tr>
+        <td><img src="<%= el.imgURL%>"></td>
         <td><%= el.namePost%></td>
-        <td><%= el.rating%></td>
+        <td><%= Helpers.rateToStar(el.rating)%></td>
         <td><%= el.content%></td>
         <td><%= el.User.username%></td>
-        <td><a href="posts/<%=el.id%>/edit">Edit</a> || <a href="posts/<%=el.id%>/delete">Delete</a> || <a href="posts/<%=el.id%>/addTag">Add Tag</a></td> 
+        <td><a href="/users/<%= user.id%>/posts/<%=el.id%>/edit">Edit</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/delete">Delete</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/addTag">Add Tag</a></td> 
       </tr>
     <% })%>
   </table>

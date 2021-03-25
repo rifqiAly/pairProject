@@ -4,13 +4,13 @@
 
 <table border="1">
   <tr>
-    <th>Name</th>
     <th>Username</th>
+    <th>Name</th>
   </tr>
   <% users.forEach(el =>{%>
     <tr>
-      <td><%= el.nameuser%></td>
       <td><%= el.username%></td>
+      <td><%= el.first_name%></td>
     </tr>
   <% })%>
 </table>

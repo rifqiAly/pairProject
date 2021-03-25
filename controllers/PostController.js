@@ -1,5 +1,6 @@
-const Helper = require('../helpers/Helpers')
+const Helpers = require('../helpers/Helpers')
 const {User, Tag, Post, TagPost} = require('../models')
+require('dotenv').config()
 
 class PostController{
 
@@ -14,12 +15,18 @@ class PostController{
   static showposts(req,res){
     PostController.readPost({include: [{
       model: User,
-      attributes: ["id","nameuser","username"]
+      attributes: ["id","username",'first_name']
       }]
     })
       .then(a =>{
-        res.render('pages/posts',{
-          data: a
+        return User.findOne({ where: { id: req.params.userid } })
+        .then(user=>{
+          console.log(a)
+          res.render('pages/posts',{
+            data: a,
+            user,
+            Helpers
+          })
         })
       })
       .catch(err =>{
@@ -28,7 +35,12 @@ class PostController{
   } 
 
   static showpostsAdd(req,res){
-    res.render('pages/addPost')
+    return User.findOne({ where: { id: req.params.userid } })
+      .then(user=>{
+      res.render('pages/addPost',{
+        user
+      })
+      })
   }
 
   static postsAdd(req,res){
@@ -36,10 +48,11 @@ class PostController{
       namePost: req.body.namePost,
       rating: req.body.rating,
       content: req.body.content,
-      UserId: 1 // THIS WILL BE CHANGED ONCE LOGIN IS CREATED
+      imgURL: req.body.imgURL,
+      UserId: req.params.userid
     })
       .then(()=>{
-        res.redirect('/posts')
+        res.redirect(`/users/${req.params.userid}/posts`)
       })
       .catch(err =>{
         res.send(err)
@@ -50,7 +63,11 @@ class PostController{
   static showpostsEdit(req,res){
     Post.findOne({ where: { id: +req.params.id }, include: User })
     .then(a=>{
-      res.render('pages/editPost',{data: a})
+      let user = {
+        id: +req.params.userid
+      }
+      res.render('pages/editPost',{data: a,
+      user})
     })
     .catch(err=>{
       res.send(err)
@@ -68,7 +85,7 @@ class PostController{
       }
     })
       .then(()=>{
-          res.redirect('/posts')
+          res.redirect(`/users/${req.params.userid}/posts`)
         })
       .catch((err)=>{
         if(err){
@@ -80,7 +97,7 @@ class PostController{
   static postsDelete(req,res){
     Post.destroy({ where: {id: req.params.id}})
       .then(()=>{
-        res.redirect('/posts')
+        res.redirect(`/users/${req.params.userid}/posts`)
       })
       .catch((err)=>{
         res.send(err)
@@ -100,10 +117,14 @@ class PostController{
       .then(s =>{
         return TagPost.findAll({ where: { PostId: +req.params.id }})
       .then(d =>{
+        let user={
+          id: +req.params.userid
+        }
         res.render('pages/addTagInPost',{
           post:a,
           tag: s,
-          tagpost: d
+          tagpost: d,
+          user
           })
       })
       })
@@ -129,10 +150,8 @@ class PostController{
       let tagged = tag.nameTag
       let posted = post.namePost
       
-      console.log(email,tagged,posted)
-      
-      Helper.sendNotif(email,tagged,posted)
-      res.redirect('/posts',{})
+      Helpers.sendNotif(email,tagged,posted)
+      res.redirect(`/users/${req.params.userid}/posts`)
     })
     })
     })

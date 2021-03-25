@@ -1,20 +1,22 @@
 const express = require('express')
 const PostController = require('../controllers/PostController')
+const isLogin = require('../middleware/isLogin')
+
 
 const post = express.Router()
 
-post.get('/posts', PostController.showposts)
+post.get('/users/:userid/posts', isLogin, PostController.showposts)
 
-post.get('/posts/add', PostController.showpostsAdd)
-post.post('/posts/add', PostController.postsAdd)
+post.get('/users/:userid/posts/add', isLogin, PostController.showpostsAdd)
+post.post('/users/:userid/posts/add', isLogin, PostController.postsAdd)
 
-post.get('/posts/:id/edit', PostController.showpostsEdit)
-post.post('/posts/:id/edit', PostController.postsEdit)
+post.get('/users/:userid/posts/:id/edit', isLogin, PostController.showpostsEdit)
+post.post('/users/:userid/posts/:id/edit', isLogin, PostController.postsEdit)
 
-post.get('/posts/:id/delete', PostController.postsDelete)
+post.get('/users/:userid/posts/:id/delete', isLogin, PostController.postsDelete)
 
-post.get('/posts/:id/addTag', PostController.showAddTag)
-post.post('/posts/:id/addTag', PostController.addTag)
+post.get('/users/:userid/posts/:id/addTag', isLogin, PostController.showAddTag)
+post.post('/users/:userid/posts/:id/addTag', isLogin, PostController.addTag)
 
 
 

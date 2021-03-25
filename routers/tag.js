@@ -1,18 +1,21 @@
 const express = require('express')
 const TagController = require('../controllers/TagController')
+const isLogin = require('../middleware/isLogin')
+
 
 const tag = express.Router()
 
-tag.get('/tags', TagController.showtags)
 
-tag.get('/tags/add', TagController.showtagsAdd)
-tag.post('/tags/add', TagController.tagsAdd)
+tag.get('/users/:userid/tags', isLogin, TagController.showtags)
+
+tag.get('/users/:userid/tags/add', isLogin, TagController.showtagsAdd)
+tag.post('/users/:userid/tags/add', isLogin, TagController.tagsAdd)
 
 
 
-tag.get('/tags/:id/delete', TagController.tagDelete)
+tag.get('/users/:userid/tags/:id/delete', isLogin, TagController.tagDelete)
 
-tag.get('/tags/:id/seePosts', TagController.seeTags)
+tag.get('/users/:userid/tags/:id/seePosts', isLogin, TagController.seeTags)
 
 
 

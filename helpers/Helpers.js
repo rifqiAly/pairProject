@@ -27,6 +27,18 @@ class Helper{
     })
   }
 
+  static rateToStar(rate){
+    let out=''
+    for(let i=0; i < 5; i++){
+      if(i< rate){
+        out+= '★'
+      }else{
+        out+='☆'
+      }
+    }
+    return out
+  }
+
 }
 
 module.exports = Helper
