@@ -1,3 +1,4 @@
+const Helper = require('../helpers/Helpers')
 const {User, Tag, Post, TagPost} = require('../models')
 
 class PostController{
@@ -118,7 +119,23 @@ class PostController{
       TagId: req.body.TagId,
     })
     .then(()=>{
-      res.redirect('/posts')
+      return User.findOne({where: { id : req.params.userid }})
+    .then(user =>{
+      return Tag.findOne({where: {id: req.body.TagId}})
+    .then(tag=>{
+      return Post.findOne({where: {id:req.params.id}})
+    .then(post=>{
+      let email = user.email
+      let tagged = tag.nameTag
+      let posted = post.namePost
+      
+      console.log(email,tagged,posted)
+      
+      Helper.sendNotif(email,tagged,posted)
+      res.redirect('/posts',{})
+    })
+    })
+    })
     })
     .catch(err =>{
       res.send(err)
