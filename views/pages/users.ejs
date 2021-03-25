@@ -1,0 +1,18 @@
+<%- include('../partials/header') %>
+
+<h1>List Users</h1>
+
+<table border="1">
+  <tr>
+    <th>Username</th>
+    <th>Name</th>
+  </tr>
+  <% users.forEach(el =>{%>
+    <tr>
+      <td><%= el.username%></td>
+      <td><%= el.first_name%></td>
+    </tr>
+  <% })%>
+</table>
+</body>
+</html>

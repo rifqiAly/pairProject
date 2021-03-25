@@ -1,0 +1,19 @@
+
+<%- include('../partials/header') %>
+<h2><%= tag.nameTag%></h2>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Rating</th>
+  </tr>
+  
+ <%tag.Posts.forEach(el =>{%>
+  <tr>
+    <td><%= el.namePost%></td>
+    <td><%= el.rating%></td>
+  </tr>
+<%})%>
+</table>
+</body>
+</html>
