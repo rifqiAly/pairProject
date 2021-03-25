@@ -1,0 +1,1 @@
+//ini cuma jadi awalnya, abis ini aku post ke repo
