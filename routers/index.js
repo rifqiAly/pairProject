@@ -14,13 +14,12 @@ router.post('/', Controller.postLogin)
 router.get('/register', Controller.register)
 router.post('/register', Controller.postRegister)
 router.get('/failed', Controller.failed)
-router.get('/logout', isLogin, Controller.logout)
+router.get('/logout', Controller.logout)
 
 
-
+router.use(isLogin)
 router.get('/users/:userid', isLogin, (req,res)=>{
   let userid = req.params.userid
-
   User.findOne({where:{id: userid}})
     .then(user=>{
       res.render('pages/main',{

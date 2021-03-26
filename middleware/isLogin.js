@@ -1,6 +1,5 @@
 const isLogin = (req,res,next)=>{
-  if(Number(req.params.userid) === req.session.idUser){
-      console.log(req.params.userid);
+  if(req.session.loginStat == true){
       console.log(req.session);
       next()
   }

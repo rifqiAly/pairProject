@@ -17,13 +17,14 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     username: {
+      unique: true,
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
           args: true,
           msg: 'Tolong masukkan username dengan benar'
         }
-      }
+      },
     },
     password: {
       type: DataTypes.STRING,
