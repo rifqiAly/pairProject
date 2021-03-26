@@ -53,7 +53,7 @@ class Controller{
             res.redirect(`/users/${req.session.idUser}`)
         })
         .catch(err=>{
-            res.send(err)
+            res.redirect('/')
         })
 
     }

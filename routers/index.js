@@ -20,7 +20,7 @@ router.get('/logout', isLogin, Controller.logout)
 
 router.get('/users/:userid', isLogin, (req,res)=>{
   let userid = req.params.userid
-  console.log(userid)
+
   User.findOne({where:{id: userid}})
     .then(user=>{
       res.render('pages/main',{
