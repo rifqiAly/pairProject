@@ -15,7 +15,7 @@ class Helper{
       from: 'tagshareit@gmail.com',
       to: email, //via table User
       subject:'YOUR POST IS TAGGED! ',
-      text: `You put ${tag} in ${post} ` //via table User & Tag
+      text: `You have Tagged: ${tag} in ${post}, Thank you for using TagShare! ` //via table User & Tag
     }
     
     transporter.sendMail(mailOptions, (err,data)=>{
