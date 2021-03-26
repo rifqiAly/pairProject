@@ -1,15 +1,19 @@
 <%- include('../partials/header') %>
   <h1 style="text-align: center; color: black; font-size: 50px;">Posts</h1>
   <button style="margin-left: 100px; margin-top: -20px;" type="button" class="btn btn-primary"><a style="text-decoration: none; color: white;" href="/users/<%= user.id%>/posts/add">add posts</a></button><a>
-  <table border="1">
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Rating</th>
-      <th>Content</th>
-      <th>User</th>
-      <th>Actions</th>
-    </tr>
+
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Content</th>
+          <th scope="col">User</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
     <% data.forEach(el =>{%>
       <tr>
         <td><img style="width: 300px; height: 50vh;" src="<%= el.imgURL%>"></td>
