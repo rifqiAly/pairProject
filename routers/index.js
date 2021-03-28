@@ -17,7 +17,6 @@ router.get('/failed', Controller.failed)
 router.get('/logout', Controller.logout)
 
 
-router.use(isLogin)
 router.get('/users/:userid', isLogin, (req,res)=>{
   let userid = req.params.userid
   User.findOne({where:{id: userid}})

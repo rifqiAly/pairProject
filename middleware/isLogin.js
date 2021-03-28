@@ -1,10 +1,13 @@
+const {User} = require('../models')
+
 const isLogin = (req,res,next)=>{
-  if(req.session.loginStat == true){
-      console.log(req.session);
+  
+  if(req.session.loginStat == true && req.params.userid == req.session.idUser){
+    
       next()
   }
   else{
-      console.log(req.session);
+      
       res.redirect('/')
   }
 }

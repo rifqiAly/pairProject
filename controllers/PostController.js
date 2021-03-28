@@ -19,9 +19,8 @@ class PostController{
       }]
     })
       .then(a =>{
-        return User.findOne({ where: { id: req.params.userid } })
+        return User.findOne({ where: { id: req.session.idUser } })
         .then(user=>{
-          console.log(a)
           res.render('pages/posts',{
             data: a,
             user,
@@ -35,7 +34,7 @@ class PostController{
   } 
 
   static showpostsAdd(req,res){
-    return User.findOne({ where: { id: req.params.userid } })
+    return User.findOne({ where: { id: req.session.idUser } })
       .then(user=>{
       res.render('pages/addPost',{
         user
@@ -46,13 +45,12 @@ class PostController{
   static postsAdd(req,res){
     Post.create({
       namePost: req.body.namePost,
-      rating: req.body.rating,
       content: req.body.content,
       imgURL: req.body.imgURL,
-      UserId: req.params.userid
+      UserId: req.session.idUser
     })
       .then(()=>{
-        res.redirect(`/users/${req.params.userid}/posts`)
+        res.redirect(`/users/${req.session.idUser}/posts`)
       })
       .catch(err =>{
         let result = []
@@ -68,7 +66,7 @@ class PostController{
     Post.findOne({ where: { id: +req.params.id }, include: User })
     .then(a=>{
       let user = {
-        id: +req.params.userid
+        id: +req.session.idUser
       }
       res.render('pages/editPost',{data: a,
       user})
@@ -81,7 +79,6 @@ class PostController{
   static postsEdit(req,res){
     Post.update({
       namePost: req.body.namePost,
-      rating: req.body.rating,
       content: req.body.content,
     },{
       where:{
@@ -89,7 +86,45 @@ class PostController{
       }
     })
       .then(()=>{
-          res.redirect(`/users/${req.params.userid}/posts`)
+          res.redirect(`/users/${req.session.idUser}/posts`)
+        })
+      .catch((err)=>{
+        if(err){
+          let result = []
+          err.errors.forEach(el => {
+              result.push(el.message)
+          })
+          res.send(result)
+        }
+      }) 
+  }
+
+  
+  static showAddRating(req,res){
+    Post.findOne({ where: { id: +req.params.id }, include: User })
+    .then(a=>{
+      let user = {
+        id: +req.session.idUser
+      }
+      res.render('pages/editRating',{data: a,
+      user})
+    })
+    .catch(err=>{
+      res.send(err)
+    })
+  }
+
+  
+  static addRating(req,res){
+    Post.update({
+      rating: req.body.rating,
+    },{
+      where:{
+        id: req.params.id 
+      }
+    })
+      .then(()=>{
+          res.redirect(`/users/${req.session.idUser}/posts`)
         })
       .catch((err)=>{
         if(err){
@@ -105,7 +140,7 @@ class PostController{
   static postsDelete(req,res){
     Post.destroy({ where: {id: req.params.id}})
       .then(()=>{
-        res.redirect(`/users/${req.params.userid}/posts`)
+        res.redirect(`/users/${req.session.idUser}/posts`)
       })
       .catch((err)=>{
         res.send(err)
@@ -126,7 +161,7 @@ class PostController{
         return TagPost.findAll({ where: { PostId: +req.params.id }})
       .then(d =>{
         let user={
-          id: +req.params.userid
+          id: +req.session.idUser
         }
         res.render('pages/addTagInPost',{
           post:a,
@@ -148,7 +183,7 @@ class PostController{
       TagId: req.body.TagId,
     })
     .then(()=>{
-      return User.findOne({where: { id : req.params.userid }})
+      return User.findOne({where: { id : req.session.idUser }})
     .then(user =>{
       return Tag.findOne({where: {id: req.body.TagId}})
     .then(tag=>{
@@ -159,7 +194,7 @@ class PostController{
       let posted = post.namePost
       
       Helpers.sendNotif(email,tagged,posted)
-      res.redirect(`/users/${req.params.userid}/posts`)
+      res.redirect(`/users/${req.session.idUser}/posts`)
     })
     })
     })

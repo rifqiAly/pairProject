@@ -58,18 +58,13 @@ class Controller{
                             [Op.eq]: req.body.username
                         }
                     },
-                    {
-                        password: {
-                            [Op.not]: '',            // IS NOT ''
-                      }
-                    }
+                    
                 ]
             }
         })
         .then(data=>{
             let salt = bcrypt.genSaltSync(10)
-            let hash = bcrypt.hashSync(data.password, salt)
-            if(bcrypt.compareSync(data.password,hash)){
+            if(bcrypt.compareSync(req.body.password,data.password)){
                 req.session.idUser = data.id
                 req.session.loginStat = true
                 res.redirect(`/users/${req.session.idUser}`)

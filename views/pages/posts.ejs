@@ -18,10 +18,22 @@
       <tr>
         <td><img style="width: 300px; height: 50vh;" src="<%= el.imgURL%>"></td>
         <td><%= el.namePost%></td>
-        <td><%= Helpers.rateToStar(el.rating)%></td>
+        <%
+          if(el.rating == null){ 
+        %><td>Unrated</td><%
+          }else{
+          %><td><%= Helpers.rateToStar(el.rating)%></td><%
+          }
+        %>
         <td><%= el.content%></td>
         <td><%= el.User.username%></td>
-        <td><a href="/users/<%= user.id%>/posts/<%=el.id%>/edit">Edit</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/delete" onclick="return confirm('Yakin mau di delete?🥺😢🤣')">Delete</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/addTag">Add Tag</a></td> 
+        <%
+          if(el.User.id != user.id){
+            %><td><a href="/users/<%= user.id%>/posts/<%=el.id%>/rate">Rate</a></td> <%
+          }else{
+            %><td><a href="/users/<%= user.id%>/posts/<%=el.id%>/edit">Edit</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/delete" onclick="return confirm('Yakin mau di delete?🥺😢🤣')">Delete</a> || <a href="/users/<%= user.id%>/posts/<%=el.id%>/addTag">Add Tag</a></td> <%
+          }
+        %>
       </tr>
     <% })%>
   </table>

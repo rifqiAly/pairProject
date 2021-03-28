@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+  <h1>Add Rating</h1>
+  <form method="POST">
+    <label>Rating</label>
+    <br>
+    <input type="number" name="rating" min="1" max="5">
+    <br>
+    <br>
+    <input type="submit" value="Save" >
+    <a href="/users/<%= user.id%>/posts"> Cancel </a>
+  </form>
+</body>
+</html>

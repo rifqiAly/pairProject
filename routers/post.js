@@ -10,6 +10,9 @@ post.get('/users/:userid/posts', isLogin, PostController.showposts)
 post.get('/users/:userid/posts/add', isLogin, PostController.showpostsAdd)
 post.post('/users/:userid/posts/add', isLogin, PostController.postsAdd)
 
+post.get('/users/:userid/posts/:id/rate', isLogin, PostController.showAddRating)
+post.post('/users/:userid/posts/:id/rate', isLogin, PostController.addRating)
+
 post.get('/users/:userid/posts/:id/edit', isLogin, PostController.showpostsEdit)
 post.post('/users/:userid/posts/:id/edit', isLogin, PostController.postsEdit)
 
